@@ -1,4 +1,4 @@
-function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps, VVHatCacheBar, UUHatCacheBar] = MatSignalExtractJP(X, matName, nsim, colCent, rowCent, cull, percentile, noiselvl)
+function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps, VVHatCacheBar, UUHatCacheBar, randAngleCache, randAngleCacheLoad, randAngle, randAngleLoad] = MatSignalExtractJP(X, matName, nsim, colCent, rowCent, cull, percentile, noiselvl)
 % MatSignalExtractMJ   Matrix signal extraction
 %   Estimate signal rank, signal row space, corresponding perturbation
 %   angle and noise matrix. Adjust signals based on random direction angle.
@@ -57,8 +57,8 @@ function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps,
     end
     EHatImpute = EHatGood + UHat * diag(imputedSingVals*noiselvl) * VHat' ;
     
-    randAngleCache = randDirAngleMJ(n, rHat, 1000);
-    randAngleCacheLoad = randDirAngleMJ(d, rHat, 1000);
+    randAngleCache = randDirAngleMJ(n, rHat, nsim);
+    randAngleCacheLoad = randDirAngleMJ(d, rHat, nsim);
     randAngle = quantile(randAngleCache, 0.05); % TRYING THIS AT 5 PERCENT
     randAngleLoad = quantile(randAngleCacheLoad, 0.05);
     

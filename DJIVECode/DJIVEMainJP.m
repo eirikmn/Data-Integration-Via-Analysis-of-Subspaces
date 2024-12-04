@@ -126,7 +126,7 @@ function outstruct = DJIVEMainJP(datablock, paramstruct, truth)
     end
     
     % Step 1: Estimate signal space and perturbation angle
-    [VBars, UBars, phiBars, psiBars, EHats, rBars, singVals, singValsHat, rSteps, VVHatCacheBars, UUHatCacheBars] = ...
+    [VBars, UBars, phiBars, psiBars, EHats, rBars, singVals, singValsHat, rSteps, VVHatCacheBars, UUHatCacheBars, randAngleCache, randAngleCacheLoad, randAngle, randAngleLoad] = ...
         DJIVESignalExtractJP(datablockc, dataname, nsim, 0, colCent, rowCent, filterPerc, noisepercentile);
     
     delete(gcp('nocreate'))
@@ -147,6 +147,10 @@ function outstruct = DJIVEMainJP(datablock, paramstruct, truth)
     outstruct.VVHatCacheBars = VVHatCacheBars ;
     outstruct.UUHatCacheBars = UUHatCacheBars ;
     outstruct.jointBasisMapRaw = outMap ;
+    outstruct.randAngleCache = randAngleCache;
+    outstruct.randAngleCacheLoad = randAngleCacheLoad;
+    outstruct.randAngle= randAngle;
+    outstruct.randAngleLoad= randAngleLoad;
     
     %{
     save SigExt.mat VBars UBars phiBars psiBars EHats rBars singVals singValsHat rSteps

@@ -18,7 +18,10 @@ phiBars = outstruct.phiBars ;
 psiBars = outstruct.psiBars ;
 VVHatCacheBars = outstruct.VVHatCacheBars ;
 UUHatCacheBars = outstruct.UUHatCacheBars ;
-
+randAngleCache = outstruct.randAngleCache;
+randAngleCacheLoad = outstruct.randAngleCacheLoad;
+randAngleObjects = outstruct.randAngle;
+randAngleTraits= outstruct.randAngleLoad;
 
 uniqueStr = titlestr ;
 logENC = true ;
@@ -35,10 +38,10 @@ rankMax = zeros(1,nb) ;
 for ib = 1:nb
     trueObjKeys = keys(outstruct.matLoadings{ib}) ;
     [ds(ib),~] = size(outstruct.matLoadings{ib}(trueObjKeys{1})) ;
-    randAngleCache = randDirAngleMJ(n, rBars(ib), 1000);
-    randAngleCacheLoad = randDirAngleMJ(ds(ib), rBars(ib), 1000);
-    randAngleTraits(ib) = quantile(randAngleCache, 0.05);
-    randAngleObjects(ib) = quantile(randAngleCacheLoad, 0.05);
+    %randAngleCache = randDirAngleMJ(n, rBars(ib), 1000);
+    %randAngleCacheLoad = randDirAngleMJ(ds(ib), rBars(ib), 1000);
+    %randAngleTraits(ib) = quantile(randAngleCache, 0.05);
+    %andAngleObjects(ib) = quantile(randAngleCacheLoad, 0.05);
 
     gothVi = values(outstruct.jointBasisMap, keys(outstruct.matLoadings{ib})) ;
     gothLi = values(outstruct.matLoadings{ib}) ;
