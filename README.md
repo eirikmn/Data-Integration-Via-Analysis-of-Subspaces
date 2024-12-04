@@ -1,7 +1,7 @@
-# DIVAS2021
+# Data Integration Via Analysis of Subspaces (DIVAS)
 MATLAB Code for Data Integration Via Analysis of Subspaces
 
-Main function: DJIVEMainJP(), takes in the datablocks as a cell array, a classic Steve Marron paramstruct, and an optional third argument for "true signal" for diagnostic use.
+Main function: DJIVEMainJP(), takes in the datablocks as a cell array, a MATLAB struct object containing tuning parameters, and an optional third argument for "true signal" for diagnostic use.
 Executes three subroutines:
 
   DJIVESignalExtractJP(), Finds signal ranks & perturbation angles for each data block. This function will attempt to initialize a parallel pool.
