@@ -179,8 +179,8 @@ function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps,
     UUHatCacheBar = cell(nsim, 1);
     singValsTildeBar = singValsTilde(1:rBar);
     parfor s = 1:nsim
-        rng(seed + nsim+s)
 
+        
         randV = randn(n, rBar);
         if colCent
             randV = randV - repmat(mean(randV,1), n, 1);
