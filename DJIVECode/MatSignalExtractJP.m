@@ -1,4 +1,4 @@
-function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps, VVHatCacheBar, UUHatCacheBar, randAngleCache, randAngleCacheLoad, randAngle, randAngleLoad] = MatSignalExtractJP(X, matName, nsim, colCent, rowCent, cull, percentile, noiselvl)
+function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps, VVHatCacheBar, UUHatCacheBar, randAngleCache, randAngleCacheLoad, randAngle, randAngleLoad] = MatSignalExtractJP(X, matName, nsim, colCent, rowCent, cull, percentile, seed, noiselvl)
 % MatSignalExtractMJ   Matrix signal extraction
 %   Estimate signal rank, signal row space, corresponding perturbation
 %   angle and noise matrix. Adjust signals based on random direction angle.
@@ -51,6 +51,7 @@ function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps,
     % "Imputation" of missing energy
     imputedSingVals = zeros(1,rHat) ;
     for iter = 1:rHat
+        rng(seed+iter);
         perc = rand() ;
         marpas = PercentileMarcenkoPastur(beta, perc) ;
         imputedSingVals(iter) = sqrt(marpas);%*noiselvlShrinkage ;
@@ -167,7 +168,7 @@ function [VBar, UBar, phiBar, psiBar, rBar, EHat, singVals, singValsHat, rSteps,
     [~,minIndScore] = min(quantile(PCAnglesCacheFullBoot, 0.95, 1)) ;
     [~,minIndLoad] = min(quantile(PCAnglesCacheFullBootLoad, 0.95, 1)) ;
     %validPC(minInd) = 1 ;
-    validPC= and(validPCScore, validPCLoad);
+    validPC= and(validPCScore, validPCScoreLoad);
     validPC(minIndScore) = 1 ;
     validPC(minIndLoad) = 1 ;
 

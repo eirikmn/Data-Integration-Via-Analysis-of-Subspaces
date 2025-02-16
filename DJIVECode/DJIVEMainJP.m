@@ -49,6 +49,8 @@ function outstruct = DJIVEMainJP(datablock, paramstruct, truth)
 %
 %    filterPerc        Percentage of RDB set as max for perturbation angle
 %
+%    seed              Seed for pseudorandom number generator
+%
 %   Copyright (c)  Meilei Jiang 2018, Jack Prothero 2020
 
     disp('DIVAS Version 11-18-22 `Submission!`')
@@ -105,6 +107,11 @@ function outstruct = DJIVEMainJP(datablock, paramstruct, truth)
         if isfield(paramstruct, 'filterPerc')
             filterPerc = paramstruct.filterPerc;
         end
+        if isfield(paramstruct, 'seed')
+            seed = paramstruct.seed;
+        else
+            seed = 556;
+        end
         if isfield(paramstruct, 'noisepercentile')
             %vector with percentile of empiracle singular value to be
             %used in noise estimation specific to each block
@@ -127,7 +134,7 @@ function outstruct = DJIVEMainJP(datablock, paramstruct, truth)
     
     % Step 1: Estimate signal space and perturbation angle
     [VBars, UBars, phiBars, psiBars, EHats, rBars, singVals, singValsHat, rSteps, VVHatCacheBars, UUHatCacheBars, randAngleCache, randAngleCacheLoad, randAngle, randAngleLoad] = ...
-        DJIVESignalExtractJP(datablockc, dataname, nsim, 0, colCent, rowCent, filterPerc, noisepercentile);
+        DJIVESignalExtractJP(datablockc, dataname, nsim, 0, colCent, rowCent, filterPerc, noisepercentile, seed);
     
     delete(gcp('nocreate'))
     
